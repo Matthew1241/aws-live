@@ -480,7 +480,7 @@ def ApplyLeave():
     return render_template('ApplyLeaveOutput.html', leave_id=leave_id)
 
 # List Leave
-@app.route("/listLeave", methods=['GET'])
+@app.route("/listLeave", methods=['POST','GET'])
 def ListLeave():
     fetch_sql = "SELECT * FROM leave"
     cursor = db_conn.cursor()
