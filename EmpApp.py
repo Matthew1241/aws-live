@@ -490,7 +490,7 @@ def ListLeave():
         db_conn.commit()
         results = cursor.fetchall()
         
-     except:
+    except:
         print ("Error: unable to fecth data")
         
     return render_template('ListLeave.html', results=results) 
