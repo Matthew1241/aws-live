@@ -488,12 +488,12 @@ def ListLeave():
     try:
         cursor.execute(fetch_sql)
         db_conn.commit()
-        results = cursor.fetchall()
+        listresult = cursor.fetchall()
         
     except:
         print ("Error: unable to fecth data")
         
-    return render_template('ListLeave.html', results=results) 
+    return render_template('ListLeave.html', listresult=listresult) 
 
 # Remove Leave
 @app.route("/remLeave", methods=['POST', 'GET'])
