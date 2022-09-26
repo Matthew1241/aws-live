@@ -482,9 +482,17 @@ def ApplyLeave():
 # List Leave
 @app.route("/listLeave", methods=['POST', 'GET'])
 def ListLeave():
+    fetch_sql = "SELECT * FROM leave"
     cursor = db_conn.cursor()
-    cursor.execute("SELECT * FROM leave")
-    results = cursor.fetchall()
+    
+    try:
+        cursor.execute(fetch_sql)
+        db_conn.commit()
+        results = cursor.fetchall()
+        
+     except:
+        print ("Error: unable to fecth data")
+        
     return render_template('ListLeave.html', results=results) 
 
 # Remove Leave
