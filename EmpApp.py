@@ -487,7 +487,7 @@ def ApplyLeave():
     return render_template('ApplyLeaveOutput.html', leave_id=leave_id)
 
 # List Leave
-@app.route("/ListLeave", methods=['POST'])
+@app.route("/listLeave", methods=['POST'])
 def ListLeave():
     cursor = db_conn.cursor()
     cursor.execute("SELECT * FROM leave")
@@ -495,7 +495,7 @@ def ListLeave():
     return render_template('ListLeave.html', results=results) 
 
 # Remove Leave
-@app.route("/RemLeave", methods=['POST'])
+@app.route("/remLeave", methods=['POST'])
 def RemLeave():
 
     leave_id = request.form['leave_id']
