@@ -467,7 +467,7 @@ def ApplyLeave():
     start_date = request.form['start_date']
     end_date = request.form['end_date']
 
-    insert_leave = "INSERT INTO leave VALUES (%s, %s, %s, %s, %s, %s)"
+    insert_leave = "INSERT INTO leave_data VALUES (%s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     try:
@@ -482,7 +482,7 @@ def ApplyLeave():
 # List Leave
 @app.route("/listLeave", methods=['POST','GET'])
 def ListLeave():
-    fetch_sql = "SELECT * FROM leave"
+    fetch_sql = "SELECT * FROM leave_data"
     cursor = db_conn.cursor()
     
     try:
@@ -501,7 +501,7 @@ def RemLeave():
 
     leave_id = request.form['leave_id']
     
-    fetch_sql = "DELETE FROM leave WHERE leave_id = %s"
+    fetch_sql = "DELETE FROM leave_data WHERE leave_id = %s"
     cursor = db_conn.cursor()
 
     try:
