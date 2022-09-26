@@ -19,6 +19,7 @@ db_conn = connections.Connection(
 )
 output = {}
 table = 'employee'
+table = 'payroll'
 
 
 # home
@@ -442,12 +443,6 @@ def EditAttend():
 def getPayroll():
     emp_id = request.form['emp_id']
 
-    if emp_id == "":
-        errorMsg = "Please fill in all the fields"
-        buttonMsg = "BACK TO PAYROLL PAGE"
-        action = "/topayroll"
-        return render_template('ErrorPage.html', errorMsg=errorMsg, buttonMsg=buttonMsg, action=action)
-
     cursor = db_conn.cursor()
     select_sql = "SELECT * FROM payroll where emp_id = (%s)"
 
@@ -487,7 +482,7 @@ def ApplyLeave():
     return render_template('ApplyLeaveOutput.html', leave_id=leave_id)
 
 # List Leave
-@app.route("/listLeave", methods=['POST'])
+@app.route("/ListLeave", methods=['POST'])
 def ListLeave():
     cursor = db_conn.cursor()
     cursor.execute("SELECT * FROM leave")
@@ -495,7 +490,7 @@ def ListLeave():
     return render_template('ListLeave.html', results=results) 
 
 # Remove Leave
-@app.route("/remLeave", methods=['POST'])
+@app.route("/RemLeave", methods=['POST'])
 def RemLeave():
 
     leave_id = request.form['leave_id']
@@ -504,17 +499,13 @@ def RemLeave():
     cursor = db_conn.cursor()
 
     try:
-        cursor.execute(fetch_sql, (duty_id))
+        cursor.execute(fetch_sql, (leave_id))
         db_conn.commit()
 
     finally:
         cursor.close()  
 
     return render_template('RemLeaveOutput.html', leave_id=leave_id)
-
-
-    print("all modification done...")
-    return render_template('EditAttendanceOutput.html', duty_id=duty_id)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
