@@ -98,8 +98,6 @@ def ToRemLeave():
     return render_template('RemLeave.html')
 
 
-
-
 # Add Employee Function
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -460,7 +458,7 @@ def getPayroll():
     return render_template('PayrollOutput.html', data=data)
 
 # Apply Leave
-@app.route("/ApplyLeave", methods=['POST'])
+@app.route("/ApplyLeave", methods=['POST','GET'])
 def ApplyLeave():
     emp_id = request.form['emp_id']
     leave_type = request.form['leave_type']
@@ -482,7 +480,7 @@ def ApplyLeave():
     return render_template('ApplyLeaveOutput.html', leave_id=leave_id)
 
 # List Leave
-@app.route("/ListLeave", methods=['POST'])
+@app.route("/ListLeave", methods=['POST', 'GET'])
 def ListLeave():
     cursor = db_conn.cursor()
     cursor.execute("SELECT * FROM leave")
@@ -490,7 +488,7 @@ def ListLeave():
     return render_template('ListLeave.html', results=results) 
 
 # Remove Leave
-@app.route("/RemLeave", methods=['POST'])
+@app.route("/RemLeave", methods=['POST', 'GET'])
 def RemLeave():
 
     leave_id = request.form['leave_id']
