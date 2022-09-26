@@ -442,17 +442,9 @@ def getPayroll():
     emp_id = request.form['emp_id']
 
     cursor = db_conn.cursor()
-    select_sql = "SELECT * FROM payroll where emp_id = (%s)"
+    select_sql = "SELECT * FROM payroll where emp_id = %s"
 
     cursor.execute(select_sql, (emp_id))
-
-    if cursor.rowcount == 0:
-        errorMsg = "The employee ID is not exist"
-        buttonMsg = "BACK TO PAYROLL PAGE"
-        action = "/topayroll"
-        return render_template('ErrorPage.html', errorMsg=errorMsg, buttonMsg=buttonMsg, action=action)
-
-
     data = cursor.fetchall()
 
     return render_template('PayrollOutput.html', data=data)
